@@ -30,7 +30,11 @@
 
 #include "asm_arm.h"
 #include <stdlib.h> /* for abs() */
+#ifdef __APPLE__
+#include <machine/endian.h>
+#else
 #include <endian.h>
+#endif
   
 #ifndef _V_WIDE_MATH
 #define _V_WIDE_MATH
