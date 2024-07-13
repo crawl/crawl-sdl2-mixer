@@ -78,7 +78,7 @@ OGG_music *OGG_new_RW(SDL_RWops *src, int freesrc)
 
     SDL_memset(&callbacks, 0, sizeof(callbacks));
     callbacks.read_func = sdl_read_func;
-    callbacks.seek_func = sdl_seek_func;
+    callbacks.seek_func = (int (*)(void *, ogg_int64_t, int)) sdl_seek_func;
     callbacks.tell_func = sdl_tell_func;
 
     music = (OGG_music *)SDL_malloc(sizeof *music);

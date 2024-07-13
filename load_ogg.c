@@ -86,10 +86,10 @@ SDL_AudioSpec *Mix_LoadOGG_RW (SDL_RWops *src, int freesrc,
         goto done;
 
     callbacks.read_func = sdl_read_func;
-    callbacks.seek_func = sdl_seek_func;
+    callbacks.seek_func = (int (*)(void *, ogg_int64_t, int)) sdl_seek_func;
     callbacks.tell_func = sdl_tell_func;
-    callbacks.close_func = freesrc ?
-                           sdl_close_func_freesrc : sdl_close_func_nofreesrc;
+    callbacks.close_func = (int (*)(void *)) (freesrc ?
+                                              sdl_close_func_freesrc : sdl_close_func_nofreesrc);
 
     if (vorbis.ov_open_callbacks(src, &vf, NULL, 0, callbacks) != 0)
     {
